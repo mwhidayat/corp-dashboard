@@ -25,7 +25,7 @@ if subsidiary_filter == 'All Subsidiaries':
 else:
     filtered_data = df[df['Subsidiary Name'] == subsidiary_filter]
 
-# Update the period filter logic and chart labels
+# Period filter logic and chart labels
 if period_filter == 'Quarterly':
     filtered_data['Period'] = filtered_data['Year'].astype(str) + ' Q' + filtered_data['Month'].astype(str)
     chart_title = f'{subsidiary_filter} - Quarterly Financial Data'
@@ -59,15 +59,15 @@ def display_summary_statistics(data):
 
 # Function to display Trend Analysis - Line Chart
 def display_trend_analysis_line(data):
-    st.subheader('Trend Analysis - 1')
+    st.subheader('Historical Trend')
     trend_fig = px.line(data, x='Period', y=['Revenue', 'Expenses', 'Profit'], title=chart_title)
     st.plotly_chart(trend_fig)
 
-# Function to display Trend Analysis - Stacked Bar Chart
-def display_trend_analysis_stacked_bar(data):
-    st.subheader('Trend Analysis - 2')
-    stacked_bar_fig = px.bar(data, x='Period', y=['Revenue', 'Expenses', 'Profit'], barmode='relative', title=chart_title)
-    st.plotly_chart(stacked_bar_fig)
+# Function to display Trend Analysis - Grouped Bar Chart
+def display_trend_analysis_grouped_bar(data):
+    st.subheader('Grouped Bar Chart')
+    grouped_bar_fig = px.bar(data, x='Period', y=['Revenue', 'Expenses', 'Profit'], barmode='group', title=chart_title)
+    st.plotly_chart(grouped_bar_fig)
 
 st.markdown("---")
 
@@ -82,4 +82,4 @@ display_trend_analysis_line(filtered_data)
 st.markdown("---")
 
 # Display Trend Analysis - Stacked Bar Chart
-display_trend_analysis_stacked_bar(filtered_data)
+display_trend_analysis_grouped_bar(filtered_data)
